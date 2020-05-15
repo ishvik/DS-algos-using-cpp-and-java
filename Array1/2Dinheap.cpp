@@ -5,7 +5,7 @@ int main()
 {
     int i,j;
     int **A;
-    A=new int[3];
+    *A=new int[3];
     A[0]=new int[4];
     A[1]=new int[4];
     A[2]=new int[4];
