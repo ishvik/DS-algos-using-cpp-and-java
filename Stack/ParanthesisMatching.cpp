@@ -1,63 +1,71 @@
 #include<iostream>
-#include<stdio.h>
+#include <string.h>
 using namespace std;
 
-struct Node
+class Stack
 {
 public:
-    char data;
-    Node *next;
-}*Top=NULL;
+    int Top;
+    int Size;
+    char *s;
+};
 
-void push(char x)
+void push(Stack *St,int value)
 {
-    Node *nn=new Node;
-    if(nn==NULL)
-        cout<<"Stack is full ";
+    if(St->Top==St->Size-1)
+        cout<<"Stack is full";
     else
     {
-        nn->data=x;
-        nn->next=Top;
-        Top=nn;
+        St->Top++;
+        St->s[St->Top]=value;
     }
 }
-char pop()
+
+int pop(Stack *St)
 {
-    char x=-1;
-    if(Top==NULL)
-        cout<<"Stack is empty";
+    int x=-1;
+    if(St->Top==-1)
+        return 0;
     else
     {
-        x=Top->data;
-        Top=Top->next;
+        x=St->s[St->Top--];
     }
     return x;
 }
 
-int isbalance(char *exp)
+int IsEmpty(Stack St)
 {
-    for(int i=0;exp[i]!='\0';i++)
-    {
-        if(exp[i] == ')')
-            push(exp[i]);
-        else if(exp[i] == '(')
-        {
-            if(Top==NULL)
-                return 0;
-            pop();
-        }
-    }
-    if(Top==NULL)
+    if(St.Top==-1)
         return 1;
     else
         return 0;
 }
 
+int balance(Stack s1,char *exp)
+{
+    Stack st;
+    st.Size = strlen(exp);
+    st.Top = -1;
+    st.s = new char[st.Size];
+
+    for(int i=0;exp[i]!=0;i++)
+    {
+        if(exp[i] == '(')
+            push(&st,exp[i]);
+        else if(exp[i] == ')')
+        {
+            if(IsEmpty(st))
+                return 0;
+            pop(&st);
+        }
+    }
+    return IsEmpty(st) ? 1:0;
+}
 int main()
 {
- char *exp="((a+b)*(c-d)))";
-
- printf("%d ",isbalance(exp));
-
- return 0;
+    Stack s1;
+    char *exp;
+    exp = "((a+b)*(c-d)";
+    cout<<balance(s1,exp);
+    return 0;
 }
