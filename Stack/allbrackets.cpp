@@ -10,7 +10,7 @@ public:
     char *s;
 };
 
-void push(Stack *St,int value)
+void push(Stack *St,char value)
 {
     if(St->Top==St->Size-1)
         cout<<"Stack is full";
@@ -21,9 +21,9 @@ void push(Stack *St,int value)
     }
 }
 
-int pop(Stack *St)
+char pop(Stack *St)
 {
-    int x=-1;
+    char x=-1;
     if(St->Top==-1)
         return 0;
     else
