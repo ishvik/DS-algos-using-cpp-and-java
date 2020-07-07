@@ -9,31 +9,24 @@ struct Node
 
 Node *first=NULL;
 
-void Insert(Node *p,int pos,int value)
+void Insert(Node *p,int value)
 {
     Node *temp;
     Node *NewNode;
-    if(pos==0)
+    if(first = NULL)
     {
         NewNode=new Node;
         NewNode->data=value;
         NewNode->next=first;
         first=NewNode;
     }
-    else if(temp>0)
+    else
     {
         temp=first;
-        for(int i=0;i<pos-1 && temp;i++)
-        {
-            temp=temp->next;
-        }
-        if(temp)
-        {
-            NewNode=new Node;
-            NewNode->data=value;
-            NewNode->next=temp->next;
-            temp->next=NewNode;
-        }
+        NewNode=new Node;
+        NewNode->data=value;
+        NewNode->next=temp->next;
+        temp->next=NewNode;
     }
 }
 
@@ -55,7 +48,7 @@ int main()
     {
         int x;
         cin>>x;
-        Insert(first,i,x);
+        Insert(first,x);
     }
     display(first);
     return 0;
