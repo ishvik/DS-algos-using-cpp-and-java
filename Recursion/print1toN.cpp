@@ -13,13 +13,14 @@ void display(int n)
 void reverse(int n)
 {
   //base
-  if(n==1)
-  {
-    cout<<n<<" ";
+  if(n<=0)
     return;
-  }
-  cout<<n<<" ";
+  cout<<n<<endl;
+  cout<<"hello"<<endl;
   reverse(n-1);
+  cout<<n<<" : hii"<<endl;
+  reverse(n-2);
+  cout<<n<<" post bye"<<endl;
 }
 
 int main()
