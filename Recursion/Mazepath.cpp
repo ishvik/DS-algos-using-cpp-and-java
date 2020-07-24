@@ -23,7 +23,6 @@ int countpath(int x,int y,int x1, int y1, string s, bool arr[3][3])
 
   return count;
 }
-
 int main()
 {
   int sx,sy,ex,ey;
