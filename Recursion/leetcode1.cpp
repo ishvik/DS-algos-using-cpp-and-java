@@ -1,64 +1,39 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    bool exist(vector<vector<char>>& board, string word, int x ,int y,int pos)
-    {
-      if(word[pos] == '\0')
-        return false;
-      vector<char> c;
-      if(x+1 == word[pos])
-      {
-        c.push_back(word[pos]);
-        exist(board, word,x+1,y,pos+1);
-      }
-      if(x-1 == word[pos])
-      {
-        c.push_back(word[pos]);
-        exist(board, word,x-1,y,pos+1);
-      }
-      if(y+1 == word[pos])
-      {
-        c.push_back(word[pos]);
-        exist(board, word,x,y+1,pos+1);
-      }
-      if(y-1 == word[pos])
-      {
-        c.push_back(word[pos]);
-        exist(board, word,x,y+1,pos+1);
-      }
-    }
+  bool find(vector<vector<char>>& board,string word,int x, int y, int row, int col, int wsf)
+  {
+    if(x<0 || y<0 || x>=row || y>=col || board[x][y]!=word[wsf])
+      return false;
+    if(wsf == word.length()-1)
+      return true;
+    char element = board[x][y];
+    board[x][y] = '0';
+    bool result = false;
+    result = result || find(board,word,x+1,y,row,col,wsf+1) ||
+              find(board,word,x,y+1,row,col,wsf+1) ||
+              find(board,word,x,y-1,row,col,wsf+1) ||
+              find(board,word,x-1,y,row,col,wsf+1);
 
+    board[x][y] = element;
+    return result;
+  }
+
+  bool exist(vector<vector<char>>& board,string word)
+  {
+    if(board.size() == 0)
+      return false;
+
+    int row = board.size();
+    int col = board[0].size();
+    for(int i=0;i<row;i++)
+      for(int j=0;j<col;j++)
+        if(find(board,word,i,j,row,col,0))
+            return true;
+    return false;
+  }
 
 };
-
-
-int main()
-{
-  vector<vector<char>> v;
-  int r,c;
-  cout<<"Enter row and column of array ";
-  cin>>r>>c;
-  for(int i=0;i<r;i++)
-  {
-    vector<char> c1;
-    for(int j=0;j<c;j++)
-    {
-      char c;
-      cin>>c;
-      c1.push_back(c);
-    }
-    v.push_back(c1);
-  }
-  for(int i=0;i<v.size();i++)
-  {
-    for(int j=0;j<v.size();j++)
-      cout<<v[i][j]<<" ";
-    cout<<endl;
-  }
-  Solution s1;
-  s1.exist(v,"abcd",0,0,0);
-  return 0;
-}

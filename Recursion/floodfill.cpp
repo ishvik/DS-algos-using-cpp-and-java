@@ -6,9 +6,7 @@ class Solution {
 public:
     void travrse(vector<vector<int>>& image, int row, int col, int newColor,int sr, int sc, int source)
     {
-      if(sr==row || sc == col || sr<0 || sc<0)
-        return;
-      else if(image[sr][sc]!=newColor)
+      if(sr==row || sc == col || sr<0 || sc<0 || image[sr][sc]!=newColor)
         return;
 
       image[sr][sc]=newColor; // changing color
