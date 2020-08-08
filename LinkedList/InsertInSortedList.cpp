@@ -7,50 +7,44 @@ struct Node
     Node *next;
 };
 Node *first=NULL;
-
-void SortInsert(Node *p,int value)
+void display()
 {
-    Node *newnode;
-    Node *tail=NULL;
-    Node *temp=first;
-    newnode=new Node;
-    newnode->data=value;
-    newnode->next=NULL;
-    if(first==NULL)
-        newnode=first;
-    else
-    {
-        while(temp &&  temp->data<value)
-        {
-            tail=temp;
-            temp=temp->next;
-        }
-        if(temp==first)
-        {
-            temp->next=first;
-            first=temp;
-        }
-        else
-        {
-            newnode->next=tail->next;
-            tail->next=newnode;
-        }
-    }
-}
-
-void display(Node *p)
-{
+    Node *p = first;
     while(p!=NULL)
     {
         cout<<p->data<<" ";
         p=p->next;
     }
 }
+void SortInsert(Node *p)
+{
+    int value;
+    cout<<"Enter element ";
+    cin>>value;
+    Node *n = new Node();
+    Node *q = NULL;
+    n->data = value;
+    n->next = NULL;
+    if(p == NULL)
+      n = p;
+    else
+    {
+      while(p && p->data<value)
+      {
+        q = p;
+        p = p->next;
+      }
+      q->next = n;
+      n->next = p;
+    }
+}
+
 int main()
 {
-    SortInsert(first,123);
-    SortInsert(first,11);
-
-    display(first);
+    for(int i=0;i<5;i++)
+    {
+        SortInsert(first);
+    }
+    display();
     return 0;
 }
