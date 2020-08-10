@@ -22,7 +22,6 @@ int sum_base(int b,int n1, int n2)
     return sum;
 }
 
-
 int main()
 {
     int n1,n2,b;
