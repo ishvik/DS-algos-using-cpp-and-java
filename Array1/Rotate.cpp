@@ -1,12 +1,16 @@
 #include<iostream>
 using namespace std;
 
-void reverse(int arr[],int n,int m){
-    int temp;
-    for(int i=m,j=n-1;i<j;i++,j--){
+void reverse(int arr[],int m,int n){
+    int i = m;
+    int j = n;
+    while(i<j){
+        int temp;
         temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+        i++;
+        j--;
     }
 }
 
@@ -17,14 +21,13 @@ void display(int arr[],int n){
 }
 
 void rotate(int arr[],int n,int k){
-  if(k>n)
     k = k%n;
-  if(k<0)
-    k = k+n;
-  int k1 = n-k;
-  reverse(arr,k1,0);
-  reverse(arr,n,k1+1);
-  reverse(arr,n,0);
+    if(k<0)
+        k = k+n;
+    int k1 = n-k;
+    reverse(arr,0,k1-1);
+    reverse(arr,k1,n-1);
+    reverse(arr,0,n-1);
 }
 
 
