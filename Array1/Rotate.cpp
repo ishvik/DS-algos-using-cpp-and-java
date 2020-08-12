@@ -30,7 +30,6 @@ void rotate(int arr[],int n,int k){
     reverse(arr,0,n-1);
 }
 
-
 int main(){
     int n;
     cin>>n;
