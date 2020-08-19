@@ -31,5 +31,6 @@ int main()
     s.pop();
     cout<<"After popping two elements \n";
     display(s);
+    cout<<s.top();
     return 0;
 }
