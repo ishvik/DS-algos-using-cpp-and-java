@@ -2,36 +2,43 @@
 using namespace std;
 
 int main(){
-    int r,c;
-    cin>>r>>c;
-    int m[r][c];
 
+    int r,c;
+    cin>>r;
+    cin>>c;
+    int m[r][c];
     for(int i=0;i<r;i++){
         for(int j=0;j<c;j++){
             cin>>m[i][j];
         }
     }
 
-    int dir = 0;
+    int d = 0;
     int i = 0;
     int j = 0;
 
     while(true){
-        dir = (dir + m[i][j]) % 4;
+        d = (d + m[i][j]) % 4;
 
-        if(dir == 0)
+        if(d == 0){
             j++;
-        else if(dir == 1)
+        }
+        else if(d == 1){
             i++;
-        else if(dir == 2)
+        }
+        else if(d == 2){
             j--;
-        else if(dir == 3)
+        }
+        else if(d == 3){
             i--;
+        }
 
         if(i<0){
             i++;
             break;
-        }else if(j<0){
+        }
+        else if(j<0)
+        {
             j++;
             break;
         }
@@ -43,9 +50,9 @@ int main(){
             j--;
             break;
         }
-
     }
-    cout<<r<<endl;
-    cout<<c;
+
+    cout<<i<<endl;
+    cout<<j;
     return 0;
 }
