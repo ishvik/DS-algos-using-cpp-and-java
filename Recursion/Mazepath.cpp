@@ -1,43 +1,46 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-int countpath(int x,int y,int x1, int y1, string s, bool arr[3][3])
-{
-  //base
-  if(x == x1 && y == y1)
-  {
-    cout<<s<<endl;
-    return 1;
-  }
-  int count = 0;
-  arr[x][y] = true;
-  if(x+1<=x1 && !arr[x+1][y])
-    count+=countpath(x+1,y,x1,y1,s+"V",arr); //recursive call for vertical move
-  if(x-1>=0 && !arr[x-1][y])
-    count+=countpath(x-1,y,x1,y1,s+"U",arr); //recursive call for left move
-  if(y-1>=0 && !arr[x][y-1])
-    count+=countpath(x,y-1,x1,y1,s+"L",arr); //recursive call for right move
-  if(y+1<=y1 && !arr[x][y+1])
-    count+=countpath(x,y+1,x1,y1,s+"H",arr); //recursive call horizontal move
-  arr[x][y] = false;
-
-  return count;
-}
-int main()
-{
-  int sx,sy,ex,ey;
-  cout<<"Enter starting points ";
-  cin>>sx>>sy;
-  cout<<"Enter ending points ";
-  cin>>ex>>ey;
-  bool arr[r][c];
-  for(int i=0;i<r;i++)
-  {
-    for(int j=0;j<c;j++)
-    {
-      arr[i][j] = false;
+vector<string> getstairpath(int n){
+    if(n == 0){
+        vector<string> r;
+        r.push_back("");
+        return r;
+    }else if(n < 0){
+        vector<string> r;
+        return r;
     }
-  }
-  cout<<countpath(sx,sy,ex,ey,"",arr);
-  return 0;
+    
+    vector<string> p1 = getstairpath(n - 1);
+    vector<string> p2 = getstairpath(n - 2);
+    vector<string> p3 = getstairpath(n - 3);
+    
+    vector<string> f;
+    for(string str:p1){
+        f.push_back('1'+str);
+    }
+    for(string str:p2){
+        f.push_back('2'+str);
+    }
+    for(string str:p3){
+        f.push_back('3'+str);
+    }
+    
+    return f;
+}
+
+int main(){
+    int s;
+    cin>>s;
+    vector<string> st = getstairpath(s);
+    for(int i = 1;i<st.size();i++){
+        st.insert(st.begin()+i,", ");
+        i++;
+    }
+    cout<<"[";
+    for(int i = 0;i < st.size(); i++){
+        cout<<st[i];
+    }
+    cout<<"]";
+    return 0;
 }
