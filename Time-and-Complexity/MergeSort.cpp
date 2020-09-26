@@ -3,11 +3,6 @@ using namespace std;
 
 int *mergearray(int arr1[], int arr2[], int n1, int n2){
     int *res = new int[n1+n2];
-    // System.out.println("Merging these two arrays ");
-    // System.out.print("left array -> ");
-    // print(a);
-    // System.out.print("right array -> ");
-    // print(b);
     cout<<"Merging these two arrays "<<endl;
     cout<<"left array -> ";
     for(int i=0;i<n1;i++)
@@ -45,20 +40,29 @@ int *mergearray(int arr1[], int arr2[], int n1, int n2){
     return res;
 }
 
-int main(){
-    int n1,n2;
-    cin>>n1;
-    int *arr1 = new int[n1];
-    for(int i=0;i<n1;i++)
-        cin>>arr1[i];
-    cin>>n2;
-    int *arr2 = new int[n2];
-    for(int i=0;i<n2;i++)
-        cin>>arr2[i];
-        
-    int *res = mergearray(arr1,arr2,n1,n2);
-    for(int i=0;i<n1+n2;i++)
-        cout<<res[i]<<endl;
+int *mergesort(int arr[], int n, int lo, int hi){
+    if(lo == hi){
+        int *b = new int[1];
+        b[0] = arr[lo];
+        return b;
+    }
     
+    int mid = (lo+hi)/2;
+    int *h1 = mergesort(arr,n,lo,mid);
+    int *h2 = mergesort(arr,n,mid+1,hi);
+    
+    int *res = mergearray(h1,h2,n/2,n/2);
+    return res;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    int *res = mergesort(arr,n,0,n);
+    for(int i=0;i<n;i++)
+        cout<<res[i]<<endl;
     return 0;
 }
