@@ -36,20 +36,20 @@ int main(){
         cin>>arr[i];
     int res[n];
     Stack st;
-    st.push(arr[n-1]);
-    res[n-1] = -1;
-    for(int i=n-2;i>=0;i--){
-        while(st.StackTop() >-1 && arr[i]>=st.peek()){
+    st.push(0);
+    res[0] = 1;
+    for(int i=1;i<n;i++){
+        while(st.StackTop()>-1 && arr[i]>arr[st.peek()]){
             st.pop();
         }
-        
-        if(st.StackTop() < 0){
-            res[i] = -1;
+
+        if(st.StackTop()<0){
+            res[i] = i+1;
         }
         else{
-            res[i] = st.peek();
+            res[i] = i-st.peek();
         }
-        st.push(arr[i]);
+        st.push(i);
     }
     for(int i=0;i<n;i++){
         cout<<res[i]<<endl;
