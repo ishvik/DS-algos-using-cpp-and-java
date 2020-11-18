@@ -14,7 +14,6 @@ class Stack{
           size[top] = x;
       }
   }
-  
   void pop(){
       top--;
   }
