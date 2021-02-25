@@ -1,76 +1,58 @@
-import java.io.*;
 import java.util.*;
 
-public class SizeOfTree {
-  private static class Node {
-    int data;
-    ArrayList<Node> children = new ArrayList<>();
-  }
-
-  public static void display(Node node) {
-    String str = node.data + " -> ";
-    for (Node child : node.children) {
-      str += child.data + ", ";
+public class GenericTreeConstruction{
+    
+    public static class Node{
+        int data;
+        ArrayList<Node> children = new ArrayList<>();
     }
-    str += ".";
-    System.out.println(str);
-
-    for (Node child : node.children) {
-      display(child);
-    }
-  }
-
-  public static Node construct(int[] arr) {
-    Node root = null;
-
-    Stack<Node> st = new Stack<>();
-    for (int i = 0; i < arr.length; i++) {
-      if (arr[i] == -1) {
-        st.pop();
-      } else {
-        Node t = new Node();
-        t.data = arr[i];
-
-        if (st.size() > 0) {
-          st.peek().children.add(t);
-        } else {
-          root = t;
+    
+    public static class GenericTree{
+        Node root;
+        
+        void construct(int []arr){
+            Stack<Node> st = new Stack<>();
+            for(int i=0;i<arr.length;i++){
+                if(arr[i] == -1){
+                    st.pop();
+                }else{
+                    Node n = new Node();
+                    n.data = arr[i];
+                    
+                    if(st.size() > 0){
+                        st.peek().children.add(n);
+                        st.push(n);
+                    }else{
+                        this.root = n;
+                        st.push(n);
+                    }
+                }
+            }
         }
-
-        st.push(t);
-      }
+        
+        void displaydemo(Node node){
+            String str = node.data+" -> ";
+            for(Node child : node.children){
+                str += child.data+" , ";
+            }
+            System.out.println(str);
+            
+            for(Node child:node.children){
+                displaydemo(child);
+            }
+        }
+        
+        void display(){
+            displaydemo(this.root);
+        }
     }
-
-    return root;
-  }
-
-  public static int size(Node node){
-    // write your code here
-    if(node.children.size() == 0){
-        return 1;
+    
+    public static void main(String[] args){
+        int[] arr = {10,12,-1,14,18,-1,20,22,-1,24,-1,26,-1,-1,-1,16,28,-1,-1,-1};
+        
+        GenericTree gt = new GenericTree();
+        gt.construct(arr);
+        gt.display();
     }
-    int c = 0;
-    for(Node child : node.children){
-        int t = size(child);
-        c += t;
-    }
-    c++;
-    return c;
-  }
-
-  public static void main(String[] args) throws Exception {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int n = Integer.parseInt(br.readLine());
-    int[] arr = new int[n];
-    String[] values = br.readLine().split(" ");
-    for (int i = 0; i < n; i++) {
-      arr[i] = Integer.parseInt(values[i]);
-    }
-
-    Node root = construct(arr);
-    int sz = size(root);
-    System.out.println(sz);
-    // display(root);
-  }
-
+    
 }
