@@ -1,19 +1,23 @@
+//this program checks if a binary tree is symmetric or not through checking
+//if a binary tree has mirror image of itself with O(n) time complexity
+
 import java.util.*;
 
-public class Symmetric{
+public class SymmetricBT{
     
-    public static class Node{
+    public static class Node{ // Node of binary tree
         int data;
         Node left;
         Node right;
     }
     
-    public static class Pair{
+    public static class Pair{ //Use while constructing binary tree
         Node node;
         int state;
     }
     
-    public static Node construct(int[] arr){
+    //constructing binary tree through array -> -1 means null value
+    public static Node construct(int[] arr){ 
         Stack<Pair> st = new Stack<>();
         
         Pair temp = new Pair();
@@ -60,7 +64,7 @@ public class Symmetric{
         return root;
     }
     
-    public static boolean areMirror(Node a, Node b)  
+    public static boolean areMirror(Node a, Node b)  //checking Mirror Image of a tree
     { 
         if (a == null && b == null) 
             return true; 
@@ -71,14 +75,27 @@ public class Symmetric{
         return a.data == b.data && areMirror(a.left, b.right) && areMirror(a.right, b.left); 
     }
 
-    public static boolean isSymmetric(Node node){
-        return areMirror(node,node);
+    public static boolean isSymmetric(Node node){ 
+        return areMirror(node,node); //Symmetric means mirror image of itself so passing same node two times of same tree 
+                                     // to check if binary tree is symmetric or not
     }
 
     public static void main(String[] args){
-        int []arr = {1,2,4,-1,-1,5,-1,-1,3,6,-1,-1,7,-1,-1};
-        Node n = construct(arr);
-        System.out.println(isSymmetric(n));
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int []arr = new int[n];
+        for(int i=0;i<arr.length;i++){
+            arr[i] = scn.nextInt();
+        }
+        Node node = construct(arr);
+        System.out.println(isSymmetric(node));
     }
     
 }
+
+//input - 
+//example 1 : [3,9,20,-1,-1,15,7]
+//output - if tree is symmetric :- true  
+//         else :- false
+//Time Complexity :- O(N)
+//Space Complexity :- O(1)
