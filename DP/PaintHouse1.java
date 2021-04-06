@@ -14,6 +14,7 @@ public class PaintHouse1 {
             }
         }
         System.out.println(minCost(arr));
+        scn.close();
     }
     
     public static int minCost(int[][] costs) {
